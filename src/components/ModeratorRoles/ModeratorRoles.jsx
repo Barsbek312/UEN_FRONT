@@ -7,6 +7,7 @@ import { deleteVolunteer, getVolunteerList } from "../../redux/volunteer";
 import Nothing from "../common/Nothing/Nothing";
 import { deleteRedactor, getRedactorList } from "../../redux/redactor";
 import { deleteOrg, getOrgList } from "../../redux/org";
+import { Tooltip } from "@mui/material";
 
 const ModeratorRoles = () => {
   const dispatch = useDispatch();
@@ -54,55 +55,117 @@ const ModeratorRoles = () => {
     <div>
       <div className={mr.mod_role}>
         <div className={mr.role_and_filters}>
-          <h1>{clickOnFilter === 1 && "Volunteers" || clickOnFilter === 2 && "Redactors" || clickOnFilter === 3 && "Organizations"}</h1>
+          <h1>
+            {(clickOnFilter === 1 && "Volunteers") ||
+              (clickOnFilter === 2 && "Redactors") ||
+              (clickOnFilter === 3 && "Organizations")}
+          </h1>
           <div className={mr.filters}>
-            <p onClick={() => setClickOnFilter(1)} className={`${clickOnFilter === 1 && mr.active}`}>Volunteers</p>
-            <p onClick={() => setClickOnFilter(2)} className={`${clickOnFilter === 2 && mr.active}`}>Editors</p>
-            <p onClick={() => setClickOnFilter(3)} className={`${clickOnFilter === 3 && mr.active}`}>Organizations</p>
+            <p
+              onClick={() => setClickOnFilter(1)}
+              className={`${clickOnFilter === 1 && mr.active}`}
+            >
+              Volunteers
+            </p>
+            <p
+              onClick={() => setClickOnFilter(2)}
+              className={`${clickOnFilter === 2 && mr.active}`}
+            >
+              Editors
+            </p>
+            <p
+              onClick={() => setClickOnFilter(3)}
+              className={`${clickOnFilter === 3 && mr.active}`}
+            >
+              Organizations
+            </p>
           </div>
         </div>
         <div className={mr.mod_roles}>
           {clickOnFilter === 1 && volList && volList.length > 0 ? (
             volList.map((item) => (
-              <div className={mr.role}>
-                <div className={mr.ex_name}>
-                  <div className={mr.vol__ava_wrapper}>
-                    <img src={item.photo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`Bio: ${item?.description || "Unknown"}`} <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.role}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.vol__ava_wrapper}>
+                      <img src={item.photo || ""} />
+                    </div>
+                    <p>{item.user_name || "Unknown"}</p>
                   </div>
-                  <p>{item.user_name || "Unknown"}</p>
+                  <div className={mr.info_remove}>
+                    <p onClick={() => handleClickOnDeleteVol(item.id)}>
+                      Remove
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.info_remove}>
-                  <p onClick={() => handleClickOnDeleteVol(item.id)}>Remove</p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : clickOnFilter === 2 && redactorList && redactorList.length > 0 ? (
             redactorList.map((item) => (
-              <div className={mr.role}>
-                <div className={mr.ex_name}>
-                  <div className={mr.vol__ava_wrapper}>
-                    <img src={item.photo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`Bio: ${item?.description || "Unknown"}`} <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.role}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.vol__ava_wrapper}>
+                      <img src={item.photo || ""} />
+                    </div>
+                    <p>{item.description || "Unknown"}</p>
                   </div>
-                  <p>{item.description || "Unknown"}</p>
+                  <div className={mr.info_remove}>
+                    <p onClick={() => handleClickOnDeleteRedactor(item.id)}>
+                      Remove
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.info_remove}>
-                  <p onClick={() => handleClickOnDeleteRedactor(item.id)}>Remove</p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : clickOnFilter === 3 && orgList && orgList.length > 0 ? (
             orgList.map((item) => (
-              <div className={mr.role}>
-                <div className={mr.ex_name}>
-                  <div className={mr.vol__ava_wrapper}>
-                    <img src={item.logo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`City: ${item?.city || "Unknown"}`} <br />
+                    {`Address: ${item?.address || "Unknown"}`} <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.role}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.vol__ava_wrapper}>
+                      <img src={item.logo || ""} />
+                    </div>
+                    <p>{item.city || "Unknown"}</p>
                   </div>
-                  <p>{item.city || "Unknown"}</p>
+                  <div className={mr.info_remove}>
+                    <p onClick={() => handleClickOnDeleteOrg(item.id)}>
+                      Remove
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.info_remove}>
-                  <p onClick={() => handleClickOnDeleteOrg(item.id)}>Remove</p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : (
             <Nothing />

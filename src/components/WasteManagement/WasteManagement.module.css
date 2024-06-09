@@ -38,17 +38,31 @@
 }
 
 .delete__wrapper {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
-
+    margin-bottom: -12px;
     &>img {
         cursor: pointer;
     }
 }
 
+.search__input {
+    padding: 15px 10px;
+    border-radius: 15px;
+    border: none;
+    width: 40%;
+    outline: none;
+    font-size: 18px;
+}
+
 @media only screen and (max-width: 700px) {
     .add__post_wrapper > button {
         padding: 15px 20%
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .search__input {
+        width: 70%;
     }
 }

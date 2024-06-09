@@ -10,8 +10,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    & > img {
+
+    &>img {
         height: 100%;
         width: auto;
+    }
+}
+
+.search__org {
+    padding: 15px 10px;
+    border-radius: 15px;
+    border: none;
+    width: 40%;
+    outline: none;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 750px) {
+    .search__org {
+        width: 70%;
     }
 }

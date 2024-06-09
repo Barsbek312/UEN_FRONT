@@ -21,6 +21,7 @@ import Nothing from "../common/Nothing/Nothing";
 const WasteManagement = () => {
   const { user, isAuth, isModerator } = useSelector((state) => state.user);
   const { postList } = useSelector((state) => state.redactor);
+  const [filtredPostList, setFiltredPostList] = useState(null);
   const dispatch = useDispatch();
 
   const [isCreatePostMode, setIsCreatePostMode] = useState(false);
@@ -30,6 +31,18 @@ const WasteManagement = () => {
 
     if (res.type === "redactor/like-post/fulfilled") {
       dispatch(getPostList());
+    }
+  };
+
+  const onChangeInputText = (e) => {
+    if (postList.length > 0) {
+      setFiltredPostList(
+        postList.filter((item) =>
+          item.redactor_name
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase())
+        )
+      );
     }
   };
 
@@ -46,6 +59,10 @@ const WasteManagement = () => {
       dispatch(getPostList());
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    setFiltredPostList(postList);
+  }, [postList]);
   return (
     <div className={wm.waste__management_wrapper}>
       <div className="waste-tab">
@@ -53,13 +70,21 @@ const WasteManagement = () => {
           <img src={WasteManagementIMG} />
           <h1>WasteManagement</h1>
         </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Search..."
+            className={wm.search__input}
+            onChange={onChangeInputText}
+          />
+        </div>
         <div className="waste-posts">
           {isCreatePostMode ? (
             <CreatePostForRedactor setIsCreatePostMode={setIsCreatePostMode} />
           ) : (
             <div className={wm.post__list_wrapper}>
-              {user && postList && postList.length > 0 ? (
-                postList.map((item) => (
+              {user && filtredPostList && filtredPostList.length > 0 ? (
+                filtredPostList.map((item) => (
                   <div className="post">
                     <div>
                       <div className="post-top">
@@ -111,7 +136,7 @@ const WasteManagement = () => {
                           </div>
                         </div>
                         <div className="post-likes-dislikes">
-                          <PiArrowFatLineUpLight
+                          {/* <PiArrowFatLineUpLight
                             onClick={() =>
                               handleClickLikeOnPost(
                                 item?.url || null,
@@ -120,7 +145,7 @@ const WasteManagement = () => {
                             }
                             className={wm.like__post}
                           />
-                          <p>{item.number_of_likes}</p>
+                          <p>{item.number_of_likes}</p> */}
                         </div>
                       </div>
                       <div className="post-desc">

@@ -14,10 +14,14 @@ const OrganizationCards = ({ isShowFavorite, setIsShowFavorite }) => {
   const dispatch = useDispatch();
   const { isAuth, user } = useSelector((state) => state.user);
   const { orgList, favOrgList } = useSelector((state) => state.org);
+  const [filtredOrgList, setFiltredOrgList] = useState(null);
 
   const [showOrgFavorites, setShowOrgFavorites] = useState(null);
 
-  const handleFavoriteClick = () => {};
+  useEffect(() => {
+    console.log(showOrgFavorites)
+    setFiltredOrgList(showOrgFavorites);
+  }, [showOrgFavorites]);
 
   useEffect(() => {
     if (isAuth) {
@@ -44,20 +48,31 @@ const OrganizationCards = ({ isShowFavorite, setIsShowFavorite }) => {
     }
   }, [favOrgList, isAuth, user, orgList]);
 
-  useEffect(() => {
-    console.log(showOrgFavorites);
-  }, [showOrgFavorites]);
+  const onChangeInputText = (e) => {
+    if (showOrgFavorites.length > 0) {
+      setFiltredOrgList(
+        showOrgFavorites.filter((item) =>
+          item.user_name
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase())
+        )
+      );
+    }
+  };
 
   return (
     <div>
+      <input className={oc.search__org} placeholder="Search..." type="text" onChange={onChangeInputText}/>
       <div className="organization-cards">
         {isShowFavorite
-          ? showOrgFavorites &&
-            showOrgFavorites.length > 0 &&
-            showOrgFavorites.filter(item => item.favorite === true).map((item) => <OrgCard item={item} />)
-          : showOrgFavorites &&
-            showOrgFavorites.length > 0 &&
-            showOrgFavorites.map((item) => <OrgCard item={item} />)}
+          ? filtredOrgList &&
+          filtredOrgList.length > 0 &&
+          filtredOrgList
+              .filter((item) => item.favorite === true)
+              .map((item) => <OrgCard item={item} />)
+          : filtredOrgList &&
+          filtredOrgList.length > 0 &&
+          filtredOrgList.map((item) => <OrgCard item={item} />)}
       </div>
     </div>
   );

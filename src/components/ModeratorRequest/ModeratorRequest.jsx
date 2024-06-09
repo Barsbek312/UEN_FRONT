@@ -19,6 +19,7 @@ import {
   getOrgApplication,
   updateOrgApplication,
 } from "../../redux/org";
+import { Tooltip } from "@mui/material";
 
 const ModeratorRequest = () => {
   const dispatch = useDispatch();
@@ -126,60 +127,117 @@ const ModeratorRequest = () => {
         </div>
       </div>
       <div className={mr.mod_requests}>
-        <p>Want to{clickOnFilter === 1 && " volunteer" || clickOnFilter === 2 && ' redactor' || clickOnFilter === 3 && ' organization'}</p>
+        <p>
+          Want to
+          {(clickOnFilter === 1 && " volunteer") ||
+            (clickOnFilter === 2 && " redactor") ||
+            (clickOnFilter === 3 && " organization")}
+        </p>
         <div className={mr.requests}>
           {clickOnFilter === 1 && volApp && volApp.length > 0 ? (
             volApp.map((item) => (
-              <div className={mr.request}>
-                <div className={mr.ex_name}>
-                  <div className={mr.img__ava_wrapper}>
-                    <img src={item.photo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`City: ${item?.city || "Unknown"}`} <br />
+                    {`Country: ${item?.country || "Unknown"}`} <br />
+                    {`volonteer_type: ${
+                      item?.volonteer_type || "Unknown"
+                    }`}{" "}
+                    <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.request}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.img__ava_wrapper}>
+                      <img src={item.photo || ""} />
+                    </div>
+                    <p>{item.volonteer_type || "Неизвестно"}</p>
                   </div>
-                  <p>{item.volonteer_type || "Неизвестно"}</p>
+                  <div className={mr.acc_dis}>
+                    <p onClick={() => handleClickDeleteVolApp(item.id)}>
+                      Dismiss
+                    </p>
+                    <p onClick={() => handleClickAcceptVolApp(item.id)}>
+                      Accept
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.acc_dis}>
-                  <p onClick={() => handleClickDeleteVolApp(item.id)}>
-                    Dismiss
-                  </p>
-                  <p onClick={() => handleClickAcceptVolApp(item.id)}>Accept</p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : clickOnFilter === 2 && redactorApp && redactorApp.length > 0 ? (
             redactorApp.map((item) => (
-              <div className={mr.request}>
-                <div className={mr.ex_name}>
-                  <div className={mr.img__ava_wrapper}>
-                    <img src={item.photo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`City: ${item?.city || "Unknown"}`} <br />
+                    {`Country: ${item?.country || "Unknown"}`} <br />
+                    {`Bio: ${item?.description || "Unknown"}`} <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.request}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.img__ava_wrapper}>
+                      <img src={item.photo || ""} />
+                    </div>
+                    <p>{item.country || "Неизвестно"}</p>
                   </div>
-                  <p>{item.country || "Неизвестно"}</p>
+                  <div className={mr.acc_dis}>
+                    <p onClick={() => handleClickDeleteRedactorApp(item.id)}>
+                      Dismiss
+                    </p>
+                    <p onClick={() => handleClickAcceptRedactorApp(item.id)}>
+                      Accept
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.acc_dis}>
-                  <p onClick={() => handleClickDeleteRedactorApp(item.id)}>
-                    Dismiss
-                  </p>
-                  <p onClick={() => handleClickAcceptRedactorApp(item.id)}>
-                    Accept
-                  </p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : clickOnFilter === 3 && orgApp && orgApp.length > 0 ? (
             orgApp.map((item) => (
-              <div className={mr.request}>
-                <div className={mr.ex_name}>
-                  <div className={mr.img__ava_wrapper}>
-                    <img src={item.logo || ""} />
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`Instagram: ${item?.instagram || "Unknown"}`} <br />
+                    {`Youtube: ${item?.youtube || "Unknown"}`} <br />
+                    {`Telegram: ${item?.telegram || "Unknown"}`} <br />
+                    {`Facebook: ${item?.facebook || "Unknown"}`} <br />
+                    {`City: ${item?.city || "Unknown"}`} <br />
+                    {`email: ${item?.email || "Unknown"}`} <br />
+                    {`Name: ${item?.name || "Unknown"}`} <br />
+                    {`INN: ${item?.INN || "Unknown"}`} <br />
+                    {`Phone: ${item?.phone_number || "Unknown"}`} <br />
+                    {`Position: ${item?.position || "Unknown"}`} <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.request}>
+                  <div className={mr.ex_name}>
+                    <div className={mr.img__ava_wrapper}>
+                      <img src={item.logo || ""} />
+                    </div>
+                    <p>{item.name || "Неизвестно"}</p>
                   </div>
-                  <p>{item.name || "Неизвестно"}</p>
+                  <div className={mr.acc_dis}>
+                    <p onClick={() => handleClickDeleteOrgApp(item.id)}>
+                      Dismiss
+                    </p>
+                    <p onClick={() => handleClickAcceptOrgApp(item.id)}>
+                      Accept
+                    </p>
+                  </div>
                 </div>
-                <div className={mr.acc_dis}>
-                  <p onClick={() => handleClickDeleteOrgApp(item.id)}>
-                    Dismiss
-                  </p>
-                  <p onClick={() => handleClickAcceptOrgApp(item.id)}>Accept</p>
-                </div>
-              </div>
+              </Tooltip>
             ))
           ) : (
             <Nothing />

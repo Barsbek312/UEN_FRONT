@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import './App.css';
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -43,6 +43,7 @@ function App() {
     setIsShowLoader(loadingUser || loadingOrg || loadingRedactor || loadingVol);
   }, [loadingUser, loadingOrg, loadingRedactor, loadingVol])
 
+
   return (
     <BrowserRouter>
       <div className={'body__wrapper'}>
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/wastemanagement" element={<WasteManagement />} />
+                <Route path="*" element={<Navigate to="/moderator-roles" />} />
               </Routes>
               :
               <Routes>

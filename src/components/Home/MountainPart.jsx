@@ -18,6 +18,7 @@ const MountainPart = () => {
     const formData = new FormData(event.target);
     const res = await dispatch(sendOrgApp(formData));
     formRef.current.reset();
+    localStorage.setItem("isApplicatedOrgForm", true);
   };
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const MountainPart = () => {
       dispatch(getOrgList());
     }
   }, [isAuth]);
+
   return (
     <div>
       <div className="mountains">
@@ -33,190 +35,143 @@ const MountainPart = () => {
           <div className="partners">
             <h1>Our partners</h1>
             <div className="partners-grid">
-              {/* <ul>{orgList && orgList.map((item) => <li>{item.user_name}</li>)}</ul> */}
               <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+                {orgList && orgList.map((item) => <li>{item.user_name}</li>)}
               </ul>
             </div>
           </div>
         </div>
-        <div className="first-layer-continue">
-
-        </div>
+        <div className="first-layer-continue"></div>
         <div className="second-layer">
           <img className="second__layer_img" src={LayerTwo} />
-          <div className="organization-application">
-            <h1>Do you want to become our partner?</h1>
-            <form
-              ref={formRef}
-              className="app-form"
-              onSubmit={handleFormSubmit}
-            >
-              <div className="first-ones">
-                <div className="form-group">
-                  <label>Organization name</label>
-                  <input type="text" id="name" required name="name" />
+          {!!localStorage.getItem("isApplicatedOrgForm") ? (
+            <div className="organization-application">
+              <h1>Your application submitted succsessfuly</h1>
+            </div>
+          ) : (
+            <div className="organization-application">
+              <h1>Do you want to become our partner?</h1>
+              <form
+                ref={formRef}
+                className="app-form"
+                onSubmit={handleFormSubmit}
+              >
+                <div className="first-ones">
+                  <div className="form-group">
+                    <label>Organization name</label>
+                    <input type="text" id="name" required name="name" />
+                  </div>
+                  <div className="form-group">
+                    <label className="selector-label">
+                      Choose organization type
+                    </label>
+                    <select
+                      id="organizationType"
+                      className="organization-type-selector"
+                      required
+                      name="type_organization"
+                    >
+                      <option value={""}>--Choose organization type--</option>
+                      <option value={"Eco Organization"}>
+                        Eco Organization
+                      </option>
+                      <option value={"Green Money"}>Green Money</option>
+                      <option value={"Organic Producer"}>
+                        Organic Producer
+                      </option>
+                      <option value={"Eco Tech"}>Eco Tech</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Organization Address</label>
+                    <input type="text" id="address" required name="address" />
+                  </div>
+                  <div className="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required name="phone_number" />
+                  </div>
+                  <div className="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="email" required name="email" />
+                  </div>
+                  <div className="form-group">
+                    <label>Postal Code</label>
+                    <input
+                      type="text"
+                      id="postalcode"
+                      required
+                      name="postal_code"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Copy of registration documents</label>
+                    <input
+                      type="file"
+                      id="documents"
+                      accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                      name="file"
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Official Site Link</label>
+                    <input
+                      type="url"
+                      id="sitelink"
+                      required
+                      name="website_link"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>
+                      Name and surname of the organization representative
+                    </label>
+                    <input
+                      type="text"
+                      id="orgrepresentative"
+                      required
+                      name="representative_organizations"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Position</label>
+                    <input type="text" id="position" required name="position" />
+                  </div>
+                  <div className="form-group">
+                    <label>Organization Logo</label>
+                    <input
+                      type="file"
+                      id="orglogo"
+                      accept=".jpg,.jpeg,.png"
+                      required
+                      name="logo"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>City</label>
+                    <input type="text" id="city" required name="city" />
+                  </div>
+                  <div className="form-group">
+                    <label>INN</label>
+                    <input type="text" id="INN" required name="INN" />
+                  </div>
+                  <div className="form-group">
+                    <label>Contact</label>
+                    <input type="text" id="contact" required name="contact" />
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label className="selector-label">
-                    Choose organization type
-                  </label>
-                  <select
-                    id="organizationType"
-                    className="organization-type-selector"
-                    required
-                    name="type_organization"
-                  >
-                    <option value={""}>--Choose organization type--</option>
-                    <option value={"Eco Organization"}>Eco Organization</option>
-                    <option value={"Green Money"}>Green Money</option>
-                    <option value={"Organic Producer"}>Organic Producer</option>
-                    <option value={"Eco Tech"}>Eco Tech</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Organization Address</label>
-                  <input type="text" id="address" required name="address" />
-                </div>
-                <div className="form-group">
-                  <label>Phone Number</label>
-                  <input type="tel" id="phone" required name="phone_number" />
-                </div>
-                <div className="form-group">
-                  <label>E-mail</label>
-                  <input type="email" id="email" required name="email" />
-                </div>
-                <div className="form-group">
-                  <label>Postal Code</label>
-                  <input
-                    type="text"
-                    id="postalcode"
-                    required
-                    name="postal_code"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Copy of registration documents</label>
-                  <input
-                    type="file"
-                    id="documents"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                    name="file"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Official Site Link</label>
-                  <input
-                    type="url"
-                    id="sitelink"
-                    required
-                    name="website_link"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>
-                    Name and surname of the organization representative
-                  </label>
-                  <input
-                    type="text"
-                    id="orgrepresentative"
-                    required
-                    name="representative_organizations"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Position</label>
-                  <input type="text" id="position" required name="position" />
-                </div>
-                <div className="form-group">
-                  <label>Organization Logo</label>
-                  <input
-                    type="file"
-                    id="orglogo"
-                    accept=".jpg,.jpeg,.png"
-                    required
-                    name="logo"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>City</label>
-                  <input type="text" id="city" required name="city" />
-                </div>
-                <div className="form-group">
-                  <label>INN</label>
-                  <input type="text" id="INN" required name="INN" />
-                </div>
-                <div className="form-group">
-                  <label>Contact</label>
-                  <input type="text" id="contact" required name="contact" />
-                </div>
-              </div>
-              <label className="textarea-label">Organization Mission</label>
-              <textarea
-                id="organizationDescription"
-                className="description-textarea"
-                rows="10"
-                name="goals_description"
-                required
-              />
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+                <label className="textarea-label">Organization Mission</label>
+                <textarea
+                  id="organizationDescription"
+                  className="description-textarea"
+                  rows="10"
+                  name="goals_description"
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          )}
         </div>
         <div className="third-layer">
           <img src={LayerThree} />
