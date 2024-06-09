@@ -1,0 +1,17 @@
+.header__adapted_wrapper {
+    display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .header__adapted_wrapper {
+        display: block;
+    }
+
+    .header__bottom_wrapper {
+        display: none;
+    }
+
+    .navbar {
+        margin-left: 50px;
+    }
+}

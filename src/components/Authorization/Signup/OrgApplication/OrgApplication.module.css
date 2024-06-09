@@ -1,0 +1,121 @@
+.application_form {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 300px;
+    gap: 50px;
+}
+
+.fill_board {
+    display: flex;
+    justify-content: center;
+}
+
+.fill_board h1 {
+    color: #333333;
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.organization_application_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.organization_application_form .first_ones {
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.organization_application_form .first_ones {
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: last baseline;
+}
+
+.organization_application_form .first_ones .form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.organization_application_form .form_group label {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.organization_application_form .first_ones .form_group input,
+select {
+    width: 100%;
+    height: 35px;
+    box-sizing: border-box;
+    border-color: #333333;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-left: 10px;
+}
+
+.organization_application_form .first_ones .form_group select {
+    font-family: "Montserrat";
+}
+
+.organization_application_form .form_group input[type="file"] {
+    width: 100%;
+    height: 35px;
+    box-sizing: border-box;
+    border-color: #333333;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-left: 10px;
+}
+
+.organization_application_form .form_group input[type="file"] {
+    padding: 5px;
+    cursor: pointer;
+    color: #333333;
+    background-color: #ffffff;
+    font-family: "Montserrat";
+    padding-top: 8px;
+}
+
+.organization_application_form .form_group input[type="file"]::file-selector-button {
+    display: none;
+}
+
+.organization_application_form .textarea_label {
+    color: rgb(0, 0, 0);
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.organization_application_form textarea {
+    height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    border-color: #333333;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-left: 10px;
+    font-size: 20px;
+    padding-top: 12px;
+    resize: none;
+}
+
+.organization_application_form button {
+    grid-column: 1 / -1;
+    height: 50px;
+    margin-top: 50px;
+    font-size: 25px;
+    color: #ffffff;
+    background-color: #436D48;
+    font-family: "Montserrat";
+    border-style: none;
+    border-radius: 10px;
+}

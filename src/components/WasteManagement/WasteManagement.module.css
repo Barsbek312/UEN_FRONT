@@ -1,0 +1,54 @@
+.waste__management_wrapper {
+    padding: 0 15px;
+    padding-bottom: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.post__list_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.add__post_wrapper {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+
+    &>button {
+        padding: 26px 20%;
+        border-radius: 45px;
+        border: none;
+        outline: none;
+        background: rgba(67, 109, 72, 1);
+        font-size: 32px;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.like__post {
+    cursor: pointer;
+}
+
+.editor__link_icon {
+    cursor: pointer;
+}
+
+.delete__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    &>img {
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .add__post_wrapper > button {
+        padding: 15px 20%
+    }
+}

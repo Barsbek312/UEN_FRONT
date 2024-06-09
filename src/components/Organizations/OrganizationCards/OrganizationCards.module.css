@@ -1,0 +1,17 @@
+.contact__wrapper {
+    display: flex;
+    gap: 15px;
+}
+
+.logo__wrapper {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > img {
+        height: 100%;
+        width: auto;
+    }
+}

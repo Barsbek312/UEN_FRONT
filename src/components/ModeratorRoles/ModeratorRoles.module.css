@@ -1,0 +1,95 @@
+.mod_role {
+    padding: 0px 20px;
+    padding-bottom: 20px;
+}
+
+.role_and_filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.role_and_filters h1 {
+    font-size: 40px;
+    color: #333333;
+}
+
+.role_and_filters .filters {
+    display: flex;
+    gap: 20px;
+    font-weight:600;
+    font-size: 15px;
+}
+
+.role_and_filters .filters p{
+    color: #333333;
+    cursor: pointer;
+}
+
+.role_and_filters .filters p.active {
+    color: #436D48;
+}
+
+.mod_roles {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.role {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 30px 30px;
+    font-size: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.info_remove {
+    display: flex;
+    gap: 20px;
+}
+
+.info_remove p{
+    cursor: pointer;
+    color: red;
+}
+
+.ex_name {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.vol__ava_wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 590px) {
+    .role_and_filters {
+        flex-direction: column;
+        & > h1 {
+            margin-bottom: 10px;
+        }
+    }
+
+    .mod_roles {
+        margin-top: 20px;
+    }
+
+    .vol__ava_wrapper {
+        width: 70px;
+        height: 70px;
+    }
+}

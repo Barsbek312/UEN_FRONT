@@ -1,0 +1,75 @@
+.volunteer_tab {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 150px;
+    padding-top: 60px;
+}
+
+.volunteer_profile_tab {
+    display: flex;
+    align-items: center;
+    height: 150px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    padding: 0px 25px;
+    gap: 50px;
+}
+
+.vol__ava_wrapper {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>img {
+        height: 100%;
+        width: auto;
+
+    }
+}
+
+.volunteer_profile_tab h1 {
+    color: #333333;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.volunteer_profile_back {
+    display: flex;
+    align-items: center;
+    margin: 0px 250px;
+    height: 100px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    justify-content: center;
+    font-size: 50px;
+    color: #333333;
+    cursor: pointer;
+}
+
+.volunteer_profile_links {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    justify-content: center;
+    font-size: 40px;
+    gap: 50px;
+    color: #333333;
+}
+
+.volunteer_profile_desc {
+    display: flex;
+    align-items: center;
+    height: auto;
+    padding: 50px 100px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    justify-content: center;
+    font-size: 25px;
+}

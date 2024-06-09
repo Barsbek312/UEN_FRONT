@@ -1,0 +1,336 @@
+.user_profile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    padding: 0 15px;
+    padding-top: 20px;
+}
+
+.user_profile_back {
+    display: flex;
+    align-items: center;
+    margin: 0px 250px;
+    height: 100px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    justify-content: center;
+    font-size: 50px;
+    color: #333333;
+    cursor: pointer;
+}
+
+.user_profile_logout {
+    display: flex;
+    align-items: center;
+    margin: 0px 250px;
+    height: 100px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    justify-content: center;
+    font-size: 35px;
+    color: #333333;
+    cursor: pointer;
+}
+
+.user_profile_tab h1 {
+    color: #333333;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.user_profile_tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    padding: 0px 25px;
+    gap: 25px;
+}
+
+.user_profile_tab .username_edit_button {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.user_profile_selector {
+    display: flex;
+    justify-content: center;
+    margin: 0px 100px;
+    gap: 15px;
+}
+
+.user_profile_selector p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    border-radius: 100px 100px 100px 100px;
+    width: 100%;
+    height: 100px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.user_profile_selector p:first-child {
+    background-color: #436D48;
+    color: white;
+}
+
+.user_settings {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 50px 0px;
+}
+
+.user_settings .option {
+    display: flex;
+    background-color: white;
+    border-radius: 100px 100px 100px 100px;
+    height: 100px;
+    font-size: 30px;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    overflow-x: scroll;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.user_settings .option::-webkit-scrollbar {
+    display: none;
+}
+
+.user_settings .option p:last-child {
+    color: #436D48;
+}
+
+.example_img {
+    border-radius: 50%;
+    height: 125px;
+}
+
+.user__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.input__wrapper {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.input__wrapper>input {
+    padding-top: 43px;
+    padding-bottom: 43px;
+    border-radius: 54px;
+    border: none;
+    outline: none;
+    padding-left: 60px;
+    font-size: 24px;
+    flex: 1 0 0;
+    background-color: #fff;
+}
+
+.link__logo_wrapper {
+    position: absolute;
+    left: 15px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.button__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button__wrapper>button {
+    width: 50%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 54px;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.user__ava_wrapper {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+.user__profile_left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.change__ava_wrapper {
+    position: relative;
+
+    &>label {
+        cursor: pointer;
+    }
+
+    & input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.option>select {
+    border: none;
+    outline: none;
+    font-size: 26px;
+    margin-top: 5px;
+    text-align: end;
+    font-family: "Montserrat";
+    color: #436D48;
+}
+
+@media only screen and (max-width: 1200px) {
+    .user_settings .option {
+        font-size: 2.5vw;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .option__email {
+        display: none;
+    }
+
+    .user_settings {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .user_settings .option {
+        font-size: 4vw;
+    }
+
+    .user_profile_selector p {
+        font-size: 3vw;
+    }
+
+    .user_profile_logout p {
+        font-size: 3vw;
+    }
+
+    .option,
+    .user_profile_selector p,
+    .user_profile_logout {
+        padding: 20px 15px;
+        height: auto !important;
+    }
+
+    .user_profile_logout {
+        margin: 0 !important;
+    }
+
+    .user_profile_selector {
+        margin: 0 !important;
+    }
+
+    .user_profile_tab {
+        padding: 20px;
+        height: auto !important;
+    }
+
+    .user__ava_wrapper {
+        width: 85px;
+        height: 85px;
+    }
+
+    .user_profile_back {
+        margin: 0 !important;
+    }
+
+    .user__ava_wrapper h1 {
+        font-size: 5vw;
+    }
+
+}
+
+@media only screen and (max-width: 700px) {
+    .option>p:first-child {
+        display: none;
+    }
+
+    .user_profile_tab h1 {
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .user_profile_back {
+        height: auto !important;
+        padding: 5px 0;
+    }
+
+    .user_profile_tab h1 {
+        font-size: 17px;
+    }
+
+    .user_profile_selector p {
+        font-size: 17px;
+    }
+
+    .option p {
+        font-size: 17px;
+    }
+    .user_profile_logout {
+        display: flex;
+        gap: 15px;
+    }
+    .user_profile_logout p {
+        font-size: 17px;
+    }
+
+    .user_settings {
+        margin-top: 20px;
+    }
+
+    .input__wrapper > input {
+        padding: 20px 45px !important;
+    }
+
+    .link__logo_wrapper > svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .button__wrapper > button {
+        width: 100%;
+        padding: 20px 0;
+    }
+}

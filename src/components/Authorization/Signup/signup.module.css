@@ -1,0 +1,35 @@
+.user__type {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.user__type_wrapper {
+    width: 650px;
+}
+
+.classic__signup_button {
+    padding: 10px;
+    margin: 10px 0px 0px 0px;
+    background-color: #436D48;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: none;
+    color: white;
+    font-size: 30px;
+    font-family: "Montserrat";
+    cursor: pointer;
+    width: 100%;
+}
+
+.signup_back {
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 650px) {
+    .signup__form_wrapper {
+        padding: 0 20px;
+    }
+}

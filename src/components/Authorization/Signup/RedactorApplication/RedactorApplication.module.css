@@ -1,0 +1,70 @@
+.application_form {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 300px;
+    gap: 50px;
+}
+
+.fill_board {
+    display: flex;
+    justify-content: center;
+}
+
+.fill_board h1 {
+    color: #333333;
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.editor_application_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor_application_form label {
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-size: 20px;
+}
+
+.editor_application_form label:first-child {
+    margin-top: 0px;
+}
+
+.editor_application_form button {
+    margin-top: 25px;
+}
+
+.editor_application_form input {
+    border-color: #333333;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    height: 35px;
+    padding-left: 10px;
+}
+
+.editor_application_form textarea {
+    border-color: #333333;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    height: 100px;
+    padding-left: 10px;
+    resize: none;
+    padding-top: 10px;
+}
+
+.editor_application_form button {
+    padding: 10px;
+    margin: 25px 0px 0px 0px;
+    background-color: #436D48;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: none;
+    color: white;
+    font-size: 30px;
+    font-family: "Montserrat";
+    cursor: pointer;
+}
