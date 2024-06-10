@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getModeratorList } from "../redux/user";
+import { deleteModerator, getModeratorList } from "../redux/user";
 import { NoSsr } from "@mui/material";
 
 let instance = axios.create({
@@ -69,6 +69,37 @@ export const userAPI = {
                 'Authorization': `Bearer ${token}`
             }
         })
+        return res;
+    },
+
+    async getUserList() {
+        const token = getCookie(uen_token);
+        const res = await instance.get('auth/users/', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        return res;
+    },
+
+    async addModerator(data) {
+        const token = getCookie(uen_token);
+        const res = await instance.post('moderator/', data, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return res;
+    },
+
+    async deleteModerator(mod_id) {
+        const token = getCookie(uen_token);
+        const res = await instance.delete(`moderator/${mod_id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         return res;
     }
 }

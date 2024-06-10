@@ -143,6 +143,52 @@ export const getAnotherUser = createAsyncThunk('user/get-another-user', async (u
     }
 })
 
+export const getAllUsers = createAsyncThunk('user/get-user-list', async (_, thunkAPI) => {
+    try {
+        const res = await userAPI.getUserList();
+
+        if (res.status === 200) {
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch (err) {
+        return thunkAPI.rejectWithValue(err);
+    }
+})
+
+export const addModerator = createAsyncThunk('user/add-moderator', async (data, thunkAPI) => {
+    const body = JSON.stringify(data);
+
+    try {
+        const res = await userAPI.addModerator(body);
+
+        if (res.status === 201) {
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch (err) {
+        return thunkAPI.rejectWithValue(err);
+    }
+})
+
+export const deleteModerator = createAsyncThunk('user/delete-moderator', async (mod_id, thunkAPI) => {
+    try {
+        const res = await userAPI.deleteModerator(mod_id);
+
+        if (res.status === 204) {
+            return res;
+        } else {
+            const error = await res.text();
+            return thunkAPI.rejectWithValue(error);
+        }
+    } catch (err) {
+        return thunkAPI.rejectWithValue(err);
+    }
+})
 
 let initialState = {
     user: null,
@@ -153,7 +199,8 @@ let initialState = {
     status: null,
     isModerator: false,
     moderatorList: null,
-    anotherUser: null
+    anotherUser: null,
+    userListForAdmin: null
 }
 
 const userSlice = createSlice({
@@ -247,6 +294,35 @@ const userSlice = createSlice({
             .addCase(getAnotherUser.rejected, state => {
                 state.loadingUser = false;
             })
+            .addCase(getAllUsers.pending, state => {
+                state.loadingUser = true;
+            })
+            .addCase(getAllUsers.fulfilled, (state, action) => {
+                state.loadingUser = false;
+                state.userListForAdmin = action.payload.data;
+            })
+            .addCase(getAllUsers.rejected, state => {
+                state.loadingUser = false;
+            })
+            .addCase(addModerator.pending, state => {
+                state.loadingUser = true;
+            })
+            .addCase(addModerator.fulfilled, (state, action) => {
+                state.loadingUser = false;
+            })
+            .addCase(addModerator.rejected, state => {
+                state.loadingUser = false;
+            })
+            .addCase(deleteModerator.pending, state => {
+                state.loadingUser = true;
+            })
+            .addCase(deleteModerator.fulfilled, (state, action) => {
+                state.loadingUser = false;
+            })
+            .addCase(deleteModerator.rejected, state => {
+                state.loadingUser = false;
+            })
+
     }
 
 })

@@ -8,13 +8,16 @@ import Nothing from "../common/Nothing/Nothing";
 import { deleteRedactor, getRedactorList } from "../../redux/redactor";
 import { deleteOrg, getOrgList } from "../../redux/org";
 import { Tooltip } from "@mui/material";
+import { addModerator, deleteModerator, getAllUsers } from "../../redux/user";
 
 const ModeratorRoles = () => {
   const dispatch = useDispatch();
+  const { user, userListForAdmin } = useSelector((state) => state.user);
   const { volList } = useSelector((state) => state.vol);
   const { redactorList } = useSelector((state) => state.redactor);
   const { orgList } = useSelector((state) => state.org);
-  const [clickOnFilter, setClickOnFilter] = useState(1);
+  const [clickOnFilter, setClickOnFilter] = useState(4);
+  const [filtredUserList, setFiltredUserList] = useState(null);
 
   useEffect(() => {
     if (clickOnFilter === 1) {
@@ -22,8 +25,10 @@ const ModeratorRoles = () => {
     } else if (clickOnFilter === 2) {
       dispatch(getRedactorList());
     } else if (clickOnFilter === 3) {
-      console.log(333);
       dispatch(getOrgList());
+    } else if (clickOnFilter === 4) {
+      console.log(333);
+      dispatch(getAllUsers());
     }
   }, [clickOnFilter]);
 
@@ -51,6 +56,42 @@ const ModeratorRoles = () => {
     }
   };
 
+  useEffect(() => {
+    if (userListForAdmin && user) {
+      setFiltredUserList(userListForAdmin.filter(item => item.url !== user.url));
+    }
+  }, [userListForAdmin, user]);
+
+  const onChangeInputText = (e) => {
+    if (userListForAdmin.length > 0) {
+      setFiltredUserList(
+        userListForAdmin.filter(
+          (item) =>
+            item.first_name
+              .toLowerCase()
+              .includes(e.target.value.toLowerCase()) ||
+            item.last_name.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+    }
+  };
+
+  const handleClickOnAddMod = async (data) => {
+    const res = await dispatch(addModerator({ user: data }));
+
+    if (res.type === "user/add-moderator/fulfilled") {
+      dispatch(getAllUsers());
+    }
+  };
+
+  const handleClickOnDeleteMod = async (id) => {
+    const res = await dispatch(deleteModerator(id));
+
+    if (res.type === "user/delete-moderator/fulfilled") {
+      dispatch(getAllUsers());
+    }
+  };
+
   return (
     <div>
       <div className={mr.mod_role}>
@@ -58,9 +99,18 @@ const ModeratorRoles = () => {
           <h1>
             {(clickOnFilter === 1 && "Volunteers") ||
               (clickOnFilter === 2 && "Redactors") ||
-              (clickOnFilter === 3 && "Organizations")}
+              (clickOnFilter === 3 && "Organizations") ||
+              (clickOnFilter === 4 && "All users")}
           </h1>
           <div className={mr.filters}>
+            {user && user.is_admin && (
+              <p
+                onClick={() => setClickOnFilter(4)}
+                className={`${clickOnFilter === 4 && mr.active}`}
+              >
+                Users
+              </p>
+            )}
             <p
               onClick={() => setClickOnFilter(1)}
               className={`${clickOnFilter === 1 && mr.active}`}
@@ -81,6 +131,15 @@ const ModeratorRoles = () => {
             </p>
           </div>
         </div>
+        {clickOnFilter === 4 && (
+          <div className={mr.user__search_wrapper}>
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={onChangeInputText}
+            />
+          </div>
+        )}
         <div className={mr.mod_roles}>
           {clickOnFilter === 1 && volList && volList.length > 0 ? (
             volList.map((item) => (
@@ -163,6 +222,55 @@ const ModeratorRoles = () => {
                     <p onClick={() => handleClickOnDeleteOrg(item.id)}>
                       Remove
                     </p>
+                  </div>
+                </div>
+              </Tooltip>
+            ))
+          ) : clickOnFilter === 4 &&
+            filtredUserList &&
+            filtredUserList.length > 0 ? (
+            filtredUserList.map((item) => (
+              <Tooltip
+                title={
+                  <React.Fragment>
+                    {`email: ${item?.email || "Unknown"}`} <br />
+                    {`Birthday: ${item?.birthday || "Unknown"}`} <br />
+                    {`Phone: ${item?.phone_number || "Unknown"}`} <br />
+                    {`Position: ${
+                      (item?.volonteer && "Volunteer") ||
+                      (item?.organization && "Organization") ||
+                      (item?.redactor && "Redactor") ||
+                      "Unknown"
+                    }`}{" "}
+                    <br />
+                  </React.Fragment>
+                }
+              >
+                <div className={mr.role}>
+                  <div className={mr.ex_name}>
+                    <p>
+                      {!item?.first_name && !item.last_name
+                        ? "Unknown"
+                        : item?.first_name + " " + item?.last_name}
+                    </p>
+                  </div>
+                  <div className={mr.info_remove}>
+                    {item?.moderator ? (
+                      <p
+                        onClick={() =>
+                          handleClickOnDeleteMod(item.moderator.id)
+                        }
+                      >
+                        Remove from moderators
+                      </p>
+                    ) : (
+                      <p
+                        onClick={() => handleClickOnAddMod(item.url)}
+                        style={{ color: "green" }}
+                      >
+                        Add to moderators
+                      </p>
+                    )}
                   </div>
                 </div>
               </Tooltip>
